@@ -34,7 +34,7 @@ def analyze_highest_overhead(overheads_data):
 def process_and_print_highest_overhead_data(file_path):
     _, overheads_data = read_csv_with_csv_module(file_path)
     highest_overhead_category, highest_overhead_percentage = analyze_highest_overhead(overheads_data)
-    print(f"[HIGHEST OVERHEAD] EXPENSE: {highest_overhead_category}, PERCENTAGE: {highest_overhead_percentage}%")
+    return f"[HIGHEST OVERHEAD] EXPENSE: {highest_overhead_category}, PERCENTAGE: {highest_overhead_percentage}%\n"
 
 
 
