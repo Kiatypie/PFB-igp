@@ -29,7 +29,7 @@ def write_analysis_to_file(file_path, cash_on_hand_output, profit_loss_output, o
 
 
 # Call the function with the outputs and file path
-write_analysis_to_file("analysis_output.txt", cash_on_hand_output, profit_loss_output, overhead_expense_output)
+write_analysis_to_file("Summary_report.txt", cash_on_hand_output, profit_loss_output, overhead_expense_output)
 
 
 
