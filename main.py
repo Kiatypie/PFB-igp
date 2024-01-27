@@ -5,6 +5,11 @@ from overhead_expenses import process_and_print_highest_overhead_data
 
 
 def main(): 
+    '''
+    - Main function to process and print financial data.
+    - Processes data for each module: cash on hand, profit and loss, and overhead expenses
+    - Utilises modularisatio to run the consolidated function from each module
+    '''
     print('  CASH ON HAND  ')
     process_and_print_cash_on_hand_data(Path.cwd() / "cash-on-hand-sgd D11-90.csv")
     print('  PROFIT AND LOSS  ')
@@ -28,7 +33,7 @@ def write_analysis_to_file(file_path, cash_on_hand_output, profit_loss_output, o
         file.write(f"{overhead_expense_output}")
 
 
-# Call the function with the outputs and file path
+#Call the function to output the data into the summary report textfile
 write_analysis_to_file("Summary_report.txt", cash_on_hand_output, profit_loss_output, overhead_expense_output)
 
 

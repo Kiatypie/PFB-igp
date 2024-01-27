@@ -1,21 +1,30 @@
 from pathlib import Path
 import csv
 
-# Function to read and parse the CSV file using csv module and Path
+
 def read_csv_with_csv_module(file_path):
+    '''
+    - Read and parse the CSV file for analysis
+    '''
     with file_path.open(mode="r", encoding="UTF-8", newline="") as file:
         reader = csv.reader(file)
-        next(reader)  # Skip header
+        next(reader) 
 
         profits_and_loss = []
         for row in reader:
-            # Append the relevant data to the profits_and_loss list
+           
             profits_and_loss.append([row[0], row[1], row[2], row[3], row[4]])
 
     return profits_and_loss
 
-# Function to analyze the trend in net profit changes without using all(), sorted(), or lambda
+
 def analyze_trend_basic_manual(net_profit_changes, data):
+    '''
+    - Analyses the trend in net profit changes to see if it has a 
+      decreasing, increasing or fluctuating trend
+    - Increasing or decreasing trend: States the trend with highest increase/decrease amount and the day 
+    - Fluctuating trend: States the trend, highlighting the top 3 deficits.
+    '''
     increasing = True
     decreasing = True
 
@@ -44,17 +53,23 @@ def analyze_trend_basic_manual(net_profit_changes, data):
         top_3_deficits = deficits[:3]
         return f"Fluctuating trend. Top 3 deficits (Amount in SGD, Day): {top_3_deficits}"
 
-# Function to list all days and amounts when a deficit occurs
+
 def list_deficits(net_profit_changes, data):
+    '''
+    - list all days and amounts when a deficit occurs
+    '''
     output = ""
     for i, change in enumerate(net_profit_changes):
         if change < 0:
-            day = data[i+1][0]  # Day is in the next row (i+1) and first column
+            day = data[i+1][0]  
             output += f"[CASH DEFICIT] DAY: {day}, AMOUNT: SGD {-change}\n"
     return output
 
-# Function to print the top 3 deficits in the specified format
+
 def print_top_3_deficits(net_profit_changes, data):
+    '''
+    - Lists the top 3 deficits in an increasing order format
+    '''
     deficits = [(change, data[i+1][0]) for i, change in enumerate(net_profit_changes) if change < 0]
     for i in range(len(deficits)):
         for j in range(len(deficits)-i-1):
@@ -70,6 +85,11 @@ def print_top_3_deficits(net_profit_changes, data):
 
 
 def process_and_print_profit_loss_data(file_path):
+    '''
+    - Combines all previous functions
+    - Calculates the trend in net profit from profit and loss
+    - FLuctuating: lists out the days it occurs and the top 3 days and amounts
+    '''
     data = read_csv_with_csv_module(file_path)
     net_profit_changes = [int(data[i][4]) - int(data[i-1][4]) for i in range(1, len(data))]
     trend_result = analyze_trend_basic_manual(net_profit_changes, data)
