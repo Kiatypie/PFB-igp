@@ -14,6 +14,7 @@ def main():
 
 main()
 
+
 cash_on_hand_output =  process_and_print_cash_on_hand_data(Path.cwd() / "cash-on-hand-sgd D11-90.csv")
 profit_loss_output = process_and_print_profit_loss_data(Path.cwd() / "profit-and-loss-sgd D11-90.csv")
 overhead_expense_output = process_and_print_highest_overhead_data(Path.cwd() / "overheads-day-90.csv")
@@ -25,6 +26,7 @@ def write_analysis_to_file(file_path, cash_on_hand_output, profit_loss_output, o
         file.write(f"{profit_loss_output}")
         file.write("\nOVERHEAD EXPENSE\n")
         file.write(f"{overhead_expense_output}")
+
 
 # Call the function with the outputs and file path
 write_analysis_to_file("analysis_output.txt", cash_on_hand_output, profit_loss_output, overhead_expense_output)
