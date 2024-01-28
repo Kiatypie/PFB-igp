@@ -62,7 +62,7 @@ def list_deficits(net_profit_changes, data):
     for i, change in enumerate(net_profit_changes):
         if change < 0:
             day = data[i+1][0]  
-            output += f"[CASH DEFICIT] DAY: {day}, AMOUNT: SGD {-change}\n"
+            output += f"[NET PROFIT DEFICIT] DAY: {day}, AMOUNT: SGD {-change}\n"
     return output
 
 
@@ -78,7 +78,7 @@ def print_top_3_deficits(net_profit_changes, data):
     top_3_deficits = deficits[:3]
 
     output = ""
-    deficit_labels = ["[HIGHEST CASH DEFICIT]", "[2ND HIGHEST CASH DEFICIT]", "[3RD HIGHEST CASH DEFICIT]"]
+    deficit_labels = ["[HIGHEST NET PROFIT DEFICIT]", "[2ND HIGHEST NET PROFIT DEFICIT]", "[3RD HIGHEST NET PROFIT DEFICIT]"]
     for i, deficit in enumerate(top_3_deficits):
         output += f"{deficit_labels[i]} DAY: {deficit[1]}, AMOUNT: SGD {-deficit[0]}\n"
     return output
