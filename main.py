@@ -36,6 +36,8 @@ def write_analysis_to_file(file_path, cash_on_hand_output, profit_loss_output, o
 #Call the function to output the data into the summary report textfile
 write_analysis_to_file("Summary_report.txt", cash_on_hand_output, profit_loss_output, overhead_expense_output)
 
+print("chicken")
+
 
 
 
