@@ -98,6 +98,6 @@ def process_and_print_profit_loss_data(file_path):
     return trend_result + "\n" + top_3_deficits + "\n" + list_of_deficits
 
 
-
+print("dogs")
 
 
