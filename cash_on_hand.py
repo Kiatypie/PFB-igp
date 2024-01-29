@@ -1,7 +1,6 @@
 from pathlib import Path
 import csv
 
-
 def read_csv_with_csv_module(file_path):
     '''
     - Read and parse CSV file for analysis
@@ -16,15 +15,14 @@ def read_csv_with_csv_module(file_path):
 
     return cash_on_hand
 
-
 def compute_cash_on_hand_changes(cash_on_hand):
     '''
     - Computes the difference in cash on hand each day
     '''
     changes = []
-    for i in range(1, len(cash_on_hand)):
-        change = int(cash_on_hand[i][1]) - int(cash_on_hand[i-1][1])
-        changes.append(change)
+    for day_index in range(1, len(cash_on_hand)):
+        daily_change = int(cash_on_hand[day_index][1]) - int(cash_on_hand[day_index - 1][1])
+        changes.append(daily_change)
     return changes
 
 def analyze_cash_on_hand_trend(changes, cash_on_hand):
@@ -37,10 +35,10 @@ def analyze_cash_on_hand_trend(changes, cash_on_hand):
     increasing = True
     decreasing = True
 
-    for change in changes:
-        if change <= 0:
+    for daily_change in changes:
+        if daily_change <= 0:
             increasing = False
-        if change >= 0:
+        if daily_change >= 0:
             decreasing = False
 
     if increasing:
@@ -52,55 +50,56 @@ def analyze_cash_on_hand_trend(changes, cash_on_hand):
         day_of_max_decrease = cash_on_hand[changes.index(max_decrease) + 1][0]
         return f"Decreasing trend. Highest decrease: SGD {max_decrease} on Day {day_of_max_decrease}."
     else:
-        deficits = [(change, cash_on_hand[i + 1][0]) for i, change in enumerate(changes) if change < 0]
-        for i in range(len(deficits)):
-            for j in range(len(deficits)-i-1):
-                if deficits[j][0] > deficits[j+1][0]:
-                    deficits[j], deficits[j+1] = deficits[j+1], deficits[j]
+        deficits = [(daily_change, cash_on_hand[day_index + 1][0]) for day_index, daily_change in enumerate(changes) if daily_change < 0]
+        
+        for deficit_index in range(len(deficits)):
+            for next_index in range(len(deficits) - deficit_index - 1):
+                if deficits[next_index][0] > deficits[next_index + 1][0]:
+                    
+                    deficits[next_index], deficits[next_index + 1] = deficits[next_index + 1], deficits[next_index]
         top_3_deficits = deficits[:3]
         return f"Fluctuating trend. Top 3 deficits (Amount in SGD, Day): {top_3_deficits}"
-
 
 def print_top_3_deficits(cash_on_hand_changes, cash_on_hand):
     '''
     - Lists the top 3 deficits in an increasing order format
     '''
-    deficits = [(change, cash_on_hand[i + 1][0]) for i, change in enumerate(cash_on_hand_changes) if change < 0]
-    for i in range(len(deficits)):
-        for j in range(len(deficits) - i - 1):
-            if deficits[j][0] > deficits[j + 1][0]:
-                deficits[j], deficits[j + 1] = deficits[j + 1], deficits[j]
+    deficits = [(daily_change, cash_on_hand[day_index + 1][0]) for day_index, daily_change in enumerate(cash_on_hand_changes) if daily_change < 0]
+    
+    for deficit_index in range(len(deficits)):
+        for next_index in range(len(deficits) - deficit_index - 1):
+            if deficits[next_index][0] > deficits[next_index + 1][0]:
+                deficits[next_index], deficits[next_index + 1] = deficits[next_index + 1], deficits[next_index]
     top_3_deficits = deficits[:3]
 
     deficit_labels = ["[HIGHEST CASH DEFICIT]", "[2ND HIGHEST CASH DEFICIT]", "[3RD HIGHEST CASH DEFICIT]"]
     output = ""
-    for i, deficit in enumerate(top_3_deficits):
-        output += f"{deficit_labels[i]} DAY: {deficit[1]}, AMOUNT: SGD {-deficit[0]}\n"
+    for deficit_rank, deficit in enumerate(top_3_deficits):
+        output += f"{deficit_labels[deficit_rank]} DAY: {deficit[1]}, AMOUNT: SGD {-deficit[0]}\n"
     return output
-
 
 def list_deficits(changes, cash_on_hand):
     '''
     - list all days and amounts when a deficit occurs
     '''
     output = ""
-    for i, change in enumerate(changes):
-        if change < 0:
-            day = cash_on_hand[i+1][0]  
-            output += f"[CASH DEFICIT] DAY: {day}, AMOUNT: SGD {-change}\n"
+    for day_index, daily_change in enumerate(changes):
+        if daily_change < 0:
+            deficit_day = cash_on_hand[day_index + 1][0]  
+            output += f"[CASH DEFICIT] DAY: {deficit_day}, AMOUNT: SGD {-daily_change}\n"
     return output
 
 def process_and_print_cash_on_hand_data(file_path):
     '''
     - Combines all previous functions
     - Calculates the trend in cash on hand
-    - FLuctuating: lists out the days it occurs and the top 3 days and amounts
+    - Fluctuating: lists out the days it occurs and the top 3 days and amounts
     '''
     cash_on_hand_data = read_csv_with_csv_module(file_path)
     cash_on_hand_changes = compute_cash_on_hand_changes(cash_on_hand_data)
     cash_on_hand_result = analyze_cash_on_hand_trend(cash_on_hand_changes, cash_on_hand_data)
-    top_3_deficits = print_top_3_deficits(cash_on_hand_changes, cash_on_hand_data) 
-    list_of_deficits = list_deficits(cash_on_hand_changes, cash_on_hand_data)       
-    return cash_on_hand_result + "\n" + top_3_deficits + "\n" + list_of_deficits
+    top_3_deficits_output = print_top_3_deficits(cash_on_hand_changes, cash_on_hand_data) 
+    list_of_deficits_output = list_deficits(cash_on_hand_changes, cash_on_hand_data)       
+    return cash_on_hand_result + "\n" + top_3_deficits_output + "\n" + list_of_deficits_output
 
 
