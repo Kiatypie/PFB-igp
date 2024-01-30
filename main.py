@@ -29,7 +29,7 @@ def write_analysis_to_file(file_path, cash_on_hand_output, profit_loss_output, o
         file.write(f"{cash_on_hand_output}") 
         file.write("\nPROFIT AND LOSS\n") 
         file.write(f"{profit_loss_output}") 
-        file.write("\nOVERHEAD EXPENSE\n") 
+        file.write("\nOVERHEAD EXPENSES\n")
         file.write(f"{overhead_expense_output}") 
  
  
