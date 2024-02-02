@@ -3,7 +3,7 @@ from profits_and_loss import process_and_print_profit_loss_data
 from cash_on_hand import process_and_print_cash_on_hand_data 
 from overhead_expenses import process_and_print_highest_overhead_data 
  
- 
+#This function runs the modularization of the individual programmes.
 def main():  
     ''' 
     - Main function to process and print financial data. 

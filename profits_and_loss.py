@@ -1,6 +1,6 @@
 from pathlib import Path
 import csv
-
+#This function processes the CSV file
 def read_csv_with_csv_module(file_path):
     '''
     - Read and parse the CSV file for analysis
@@ -15,7 +15,7 @@ def read_csv_with_csv_module(file_path):
             profits_and_loss.append([row[0], row[1], row[2], row[3], row[4]])
 
     return profits_and_loss
-
+#This functon analyses the trend of cash on hand pointing out the prominent days of data 
 def analyze_trend_basic_manual(net_profit_changes, data):
     '''
     - Analyses the trend in net profit changes to see if it has a 
@@ -52,7 +52,7 @@ def analyze_trend_basic_manual(net_profit_changes, data):
         top_3_deficits = deficits[:3]
         return f"Fluctuating trend. Top 3 deficits (Amount in SGD, Day): {top_3_deficits}"
 
-
+#This function combines all previous to return all the outputs of the functions in the code
 def process_and_print_profit_loss_data(file_path):
     '''
     - Combines all previous functions
