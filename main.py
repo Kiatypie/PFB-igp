@@ -20,9 +20,9 @@ def main():
 main() 
  
  
-cash_on_hand_output =  process_and_print_cash_on_hand_data(Path.cwd() / "cash-on-hand-sgd D11-90.csv") 
-profit_loss_output = process_and_print_profit_loss_data(Path.cwd() / "profit-and-loss-sgd D11-90.csv") 
-overhead_expense_output = process_and_print_highest_overhead_data(Path.cwd() / "overheads-day-90.csv") 
+cash_on_hand_output =  process_and_print_cash_on_hand_data(Path.cwd() /"csv_folder"/ "cash-on-hand-sgd D11-90.csv") 
+profit_loss_output = process_and_print_profit_loss_data(Path.cwd() /"csv_folder"/"profit-and-loss-sgd D11-90.csv") 
+overhead_expense_output = process_and_print_highest_overhead_data(Path.cwd() /"csv_folder"/ "overheads-day-90.csv") 
 def write_analysis_to_file(file_path, cash_on_hand_output, profit_loss_output, overhead_expense_output): 
     with open(file_path, 'w', encoding='utf-8') as file: 
         file.write("\nCASH ON HAND\n") 
