@@ -11,11 +11,11 @@ def main():
     - Utilises modularisatio to run the consolidated function from each module 
     ''' 
     print('  CASH ON HAND  ') 
-    process_and_print_cash_on_hand_data(Path.cwd() / "cash-on-hand-sgd D11-90.csv") 
+    process_and_print_cash_on_hand_data(Path.cwd() /"csv_folder"/"cash-on-hand-sgd D11-90.csv") 
     print('  PROFIT AND LOSS  ') 
-    process_and_print_profit_loss_data(Path.cwd() / "profit-and-loss-sgd D11-90.csv") 
+    process_and_print_profit_loss_data(Path.cwd() /"csv_folder"/"profit-and-loss-sgd D11-90.csv") 
     print('  OVERHEAD EXPENSE  ') 
-    process_and_print_highest_overhead_data(Path.cwd() / "overheads-day-90.csv") 
+    process_and_print_highest_overhead_data(Path.cwd() /"csv_folder"/"overheads-day-90.csv") 
  
 main() 
  
